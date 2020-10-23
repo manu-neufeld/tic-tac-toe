@@ -5,7 +5,18 @@ import { useEffect } from "react";
 export const Modal = props => {
 	const [opened, setOpened] = useState(true);
 	const [player, setPlayer] = useState(1);
-	let posiblePositions = ["0", "1", "2", "3", "4", "5", "6", "7", "8"];
+	const [turn, setTurn] = useState("Make your first move");
+	const [posiblePositions, setPosiblePositions] = useState([
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		""
+	]);
 	return opened ? (
 		<div>
 			<h2>Choose your weapon</h2>
@@ -13,7 +24,7 @@ export const Modal = props => {
 				type="button"
 				onClick={() => {
 					setOpened(false);
-					setPlayer(0);
+					setPlayer(1);
 				}}>
 				X
 			</button>
@@ -21,13 +32,14 @@ export const Modal = props => {
 				type="button"
 				onClick={() => {
 					setOpened(false);
-					setPlayer(0);
+					setPlayer(2);
 				}}>
 				O
 			</button>
 		</div>
 	) : (
 		<div>
+			<h3>{turn}</h3>
 			<button
 				type="button"
 				onClick={() => {
@@ -37,7 +49,22 @@ export const Modal = props => {
 			</button>
 			<div className="row">
 				{posiblePositions.map((item, index) => (
-					<div key={index} className="border col-4">
+					<div
+						key={index}
+						className="border col-4 cell"
+						onClick={() => {
+							if (item == "") {
+								if (player == 1) {
+									posiblePositions.splice(index, 1, "X");
+									setPlayer(2);
+									setTurn("Turn Player O");
+								} else {
+									posiblePositions.splice(index, 1, "O");
+									setPlayer(1);
+									setTurn("Turn Player X");
+								}
+							}
+						}}>
 						{item}
 					</div>
 				))}
