@@ -6,6 +6,7 @@ export const Modal = props => {
 	const [opened, setOpened] = useState(true);
 	const [player, setPlayer] = useState(1);
 	const [turn, setTurn] = useState("Make your first move");
+	const [win, setWin] = useState(false);
 	const [posiblePositions, setPosiblePositions] = useState([
 		"",
 		"",
@@ -17,6 +18,29 @@ export const Modal = props => {
 		"",
 		""
 	]);
+	const winPositions = [
+		[0, 1, 2],
+		[3, 4, 5],
+		[6, 7, 8],
+		[0, 3, 6],
+		[1, 4, 7],
+		[2, 5, 8],
+		[0, 4, 8],
+		[2, 4, 6]
+	];
+	// const endGame = array => {
+	// 	for (let index = 0; index < winPositions.length; index++) {
+	// 		for (let indexWin = 0; indexWin < 3; indexWin++) {
+	// 			if (
+	// 				array[winPositions[index][0]] == "X" &&
+	// 				array[winPositions[index][1]] == "X" &&
+	// 				array[winPositions[index][2]] == "X"
+	// 			) {
+	// 				console.log(true);
+	// 			}
+	// 		}
+	// 	}
+	// };
 	return opened ? (
 		<div>
 			<h2>Choose your weapon</h2>
@@ -72,5 +96,3 @@ export const Modal = props => {
 		</div>
 	);
 };
-
-Modal.PropTypes = {};
